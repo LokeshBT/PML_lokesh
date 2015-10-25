@@ -61,9 +61,9 @@ img {
 
 
 
-<div id="practical-machine-learning---prediction-assignment-writeup" class="section level1">
-<h1>Practical Machine Learning - Prediction Assignment Writeup</h1>
-<p>For this assignment I analyzed the provided data to determine what activity an individual perform. To do this I made use of caret and randomForest, this allowed me to generate correct answers for each of the 20 test data cases provided in this assignment. I made use of a seed value for consistent results.</p>
+<div id="practical-machine-learning---project-writeup" class="section level1">
+<h1>Practical Machine Learning - Project Writeup</h1>
+<p>In this report, we have analyzed the provided data to determine the activity performed by an individual.To do this we made use of caret and randomForest, this allowed me to generate correct answers for each of the 20 test data cases provided in this assignment.</p>
 <pre class="r"><code>library(Hmisc)</code></pre>
 <pre><code>## Loading required package: grid
 ## Loading required package: lattice
@@ -98,10 +98,10 @@ library(doParallel)</code></pre>
 ## Loading required package: parallel</code></pre>
 <pre class="r"><code>set.seed(2048)
 options(warn=-1)</code></pre>
-<p>First, I loaded the data both from the provided training and test data provided by COURSERA. Some values contained a “#DIV/0!” that I replaced with an NA value.</p>
+<p>The data provided from source: <a href="http://groupware.les.inf.puc-rio.br/har" class="uri">http://groupware.les.inf.puc-rio.br/har</a> is loaded into RStudio with the provided training and testing splits provided in Coursera website. Some values contained a “#DIV/0!” that I replaced with an NA value.</p>
 <pre class="r"><code>training_data &lt;- read.csv(&quot;pml-training.csv&quot;, na.strings=c(&quot;#DIV/0!&quot;) )
 evaluation_data &lt;- read.csv(&quot;pml-testing.csv&quot;, na.strings=c(&quot;#DIV/0!&quot;) )</code></pre>
-<p>I also casted all columns 8 to the end to be numeric.</p>
+<p>The last 8 columns are caseted to be numeric.</p>
 <pre class="r"><code>for(i in c(8:ncol(training_data)-1)) {training_data[,i] = as.numeric(as.character(training_data[,i]))}
 
 for(i in c(8:ncol(evaluation_data)-1)) {evaluation_data[,i] = as.numeric(as.character(evaluation_data[,i]))}</code></pre>
@@ -180,33 +180,33 @@ confusionMatrix(predictions2,testing$classe)</code></pre>
 ## 
 ##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1395    4    0    0    0
-##          B    0  942    6    0    0
-##          C    0    3  848    8    2
-##          D    0    0    1  796    2
-##          E    0    0    0    0  897
+##          A 1395    5    0    0    0
+##          B    0  941    5    0    0
+##          C    0    3  849    8    2
+##          D    0    0    1  796    3
+##          E    0    0    0    0  896
 ## 
 ## Overall Statistics
-##                                           
-##                Accuracy : 0.9947          
-##                  95% CI : (0.9922, 0.9965)
-##     No Information Rate : 0.2845          
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-##                                           
-##                   Kappa : 0.9933          
-##  Mcnemar's Test P-Value : NA              
+##                                          
+##                Accuracy : 0.9945         
+##                  95% CI : (0.992, 0.9964)
+##     No Information Rate : 0.2845         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.993          
+##  Mcnemar's Test P-Value : NA             
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            1.0000   0.9926   0.9918   0.9900   0.9956
-## Specificity            0.9989   0.9985   0.9968   0.9993   1.0000
-## Pos Pred Value         0.9971   0.9937   0.9849   0.9962   1.0000
-## Neg Pred Value         1.0000   0.9982   0.9983   0.9981   0.9990
+## Sensitivity            1.0000   0.9916   0.9930   0.9900   0.9945
+## Specificity            0.9986   0.9987   0.9968   0.9990   1.0000
+## Pos Pred Value         0.9964   0.9947   0.9849   0.9950   1.0000
+## Neg Pred Value         1.0000   0.9980   0.9985   0.9981   0.9988
 ## Prevalence             0.2845   0.1935   0.1743   0.1639   0.1837
-## Detection Rate         0.2845   0.1921   0.1729   0.1623   0.1829
-## Detection Prevalence   0.2853   0.1933   0.1756   0.1629   0.1829
-## Balanced Accuracy      0.9994   0.9956   0.9943   0.9947   0.9978</code></pre>
+## Detection Rate         0.2845   0.1919   0.1731   0.1623   0.1827
+## Detection Prevalence   0.2855   0.1929   0.1758   0.1631   0.1827
+## Balanced Accuracy      0.9993   0.9952   0.9949   0.9945   0.9972</code></pre>
 <div id="conclusions-and-test-data-submit" class="section level2">
 <h2>Conclusions and Test Data Submit</h2>
 <p>As can be seen from the confusion matrix this model is very accurate. I did experiment with PCA and other models, but did not get as good of accuracy. Because my test data was around 99% accurate I expected nearly all of the submitted test cases to be correct. It turned out they were all correct.</p>

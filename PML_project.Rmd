@@ -1,11 +1,7 @@
-Practical Machine Learning - Prediction Assignment Writeup
+Practical Machine Learning - Project Writeup
 ==========================================================
 
-For this assignment I analyzed the provided data to determine what activity an individual perform.
-To do this I made use of caret and randomForest, this allowed me to generate correct answers for
-each of the 20 test data cases provided in this assignment.  I made use of a seed value for 
-consistent results.
-
+In this report, we have analyzed the provided data to determine the activity performed by an individual.To do this we made use of caret and randomForest, this allowed me to generate correct answers for each of the 20 test data cases provided in this assignment. 
 
 ```{r}
 library(Hmisc)
@@ -17,15 +13,14 @@ set.seed(2048)
 options(warn=-1)
 ```
 
-First, I loaded the data both from the provided training and test data provided by COURSERA.
-Some values contained a "#DIV/0!" that I replaced with an NA value.
+The data provided from source: http://groupware.les.inf.puc-rio.br/har is loaded into RStudio with the provided training and testing splits provided in Coursera website. Some values contained a "#DIV/0!" that I replaced with an NA value.
 
 ```{r}
 training_data <- read.csv("pml-training.csv", na.strings=c("#DIV/0!") )
 evaluation_data <- read.csv("pml-testing.csv", na.strings=c("#DIV/0!") )
 ```
 
-I also casted all columns 8 to the end to be numeric.
+The last 8 columns are caseted to be numeric.
 
 ```{r}
 for(i in c(8:ncol(training_data)-1)) {training_data[,i] = as.numeric(as.character(training_data[,i]))}
